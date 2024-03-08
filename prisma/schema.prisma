@@ -18,3 +18,42 @@ model Post {
 
     @@index([name])
 }
+
+enum Category {
+    TRUE_STORY
+    CHANGE_WAY_TO_LOOK_AT_LIFE
+}
+
+enum Genre {
+    ACTION
+    COMEDY
+    DRAMA
+    HORROR
+}
+
+enum AgeRange {
+    G_RATED
+    PG_RATED
+    PG_13_RATED
+    R_RATED
+}
+
+enum Mood {
+    HAPPY
+    NEUTRAL
+    SAD
+}
+
+model Movie {
+    id          Int    @id @default(autoincrement())
+    name        String
+    description String
+
+    categories Category[] // Array of categories
+    genres     Genre[]
+    ageRange   AgeRange
+    mood       Mood
+
+    avatarUrl  String
+    trailerUrl String? // Optional trailer URL
+}
