@@ -27,8 +27,9 @@ export const Button = ({
   return (
     <button
       className={twMerge(
-        "border-primary bg-primary hover:border-primary flex items-center justify-center rounded border p-2 text-white transition hover:bg-transparent disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
-        inverse && "text-primary hover:bg-primary hover:text-white",
+        "flex items-center justify-center rounded border border-primary bg-primary p-2 text-white transition hover:border-primary hover:bg-transparent disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+        inverse &&
+          "blur:bg-transparent bg-transparent text-primary hover:bg-primary hover:text-white",
         sizeStyles[size],
         className,
       )}
