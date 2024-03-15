@@ -3,15 +3,19 @@ import { useState } from "react";
 import { Header } from "~/components/Header";
 import { Quiz } from "~/components/Quiz";
 import { Button } from "~/components/ui/Button";
+import { QuizProvider } from "~/context/QuizProvider";
 
 import { api } from "~/utils/api";
 
 export default function Home() {
   const [quizStarted, setQuizStarted] = useState(false);
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
+  };
+
+  const handleCloseQuiz = () => {
+    setQuizStarted(false);
   };
 
   return (
@@ -24,7 +28,7 @@ export default function Home() {
 
       <Header />
 
-      <main className="to-background flex min-h-screen flex-col items-center justify-center gap-24 bg-gradient-to-b from-[#2c2c2c] p-4 text-white">
+      <main className="flex min-h-screen flex-col items-center justify-center gap-24 bg-gradient-to-b from-[#2c2c2c] to-background p-4 text-white">
         {!quizStarted ? (
           <>
             <div className="flex flex-col gap-2 text-center">
@@ -43,7 +47,9 @@ export default function Home() {
             </Button>
           </>
         ) : (
-          <Quiz />
+          <QuizProvider closeQuiz={handleCloseQuiz}>
+            <Quiz />
+          </QuizProvider>
         )}
       </main>
     </>
