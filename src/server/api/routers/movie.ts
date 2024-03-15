@@ -34,4 +34,25 @@ export const movieRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.db.movie.findMany();
   }),
+
+  getMoviesRecomendation: publicProcedure
+    .input(
+      z.object({
+        genre: z.array(z.enum(["ACTION", "COMEDY", "DRAMA", "HORROR"])),
+        situation: z.enum([
+          "WATCHING_MOVIE_ALONE",
+          "WATCHING_MOVIE_WITH_FRIENDS",
+          "WATCHING_MOVIE_WITH_GIRLFRIEND",
+          "WATCHING_MOVIE_WITH_FAMILY",
+        ]),
+        ageRange: z.enum(["G_RATED", "PG_RATED", "PG_13_RATED", "R_RATED"]),
+        categories: z.array(
+          z.enum(["TRUE_STORY", "CHANGE_WAY_TO_LOOK_AT_LIFE"]),
+        ),
+        mood: z.enum(["HAPPY", "NEUTRAL", "SAD"]),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.db.movie.findMany();
+    }),
 });
